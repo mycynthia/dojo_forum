@@ -1,0 +1,18 @@
+<br>
+<div class="container">
+  <%= form_for(@post) do |f| %>
+    <div class="form-group">
+      <h1><%= f.text_field :title, size: 50, placeholder: "Title" %></h1> 
+    </div>
+    <div class="form-group">
+      <p><%= f.text_area :description, size: "136x15", placeholder: "Post Description" %></p>
+    </div>
+    <div class="form-group">
+      <%= image_tag @post.image , width: "200px", height: "200px" if @post.image? %>
+      <%= f.file_field :image %>
+    </div>
+    <div class="form-group">
+      <%= f.submit %>
+    </div>
+  <% end %>
+</div>
