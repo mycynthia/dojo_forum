@@ -4,11 +4,17 @@ class PostsController < ApplicationController
     @posts = Post.page(params[:page]).per(12)
   end
   def show
-    @post = Post.find(params[:id])
+    # set_post
+  end
+  def edit
+    # set_post
   end
 
   private
   def post_params
     params.require(:post).permit(:title, :description, :image)
+  end
+  def set_post
+    @post = Post.find(params[:id])
   end
 end
