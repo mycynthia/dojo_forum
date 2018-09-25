@@ -1,22 +1,32 @@
-<h1>Post</h1>
+<div class="row-top">
+  <div class="index-title">
+  <h1>Site Name</h1>
+  </div>
+</div>
+  <div class="row-padding">
+<!-- category button -->
+
 <!-- 顯示post -->
-<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th>Replies count</th>
-      <th>Title</th>
-      <th>Last replied at</th>
-      <th>Viewed count</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td scope="row"><%= post.replies_count %></td>
-        <td><%= post.title %></td>
-        <td><%= post.created_at %></td>
-        <td><%= post.viewed_count %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th>Replies count</th>
+          <th>Title</th>
+          <th>Last replied at</th>
+          <th>Viewed count</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @posts.each do |post| %>
+          <tr>
+            <td scope="row"><%= post.replies_count %></td>
+            <td><%= link_to post.title, post_path(post) %></td>
+            <td><%= post.created_at.strftime('%Y-%m-%d') %></td>        
+            <td><%= post.viewed_count %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
