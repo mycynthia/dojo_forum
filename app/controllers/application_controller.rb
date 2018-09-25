@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
- 
+before_action :authenticate_user!, except: [:index]
+
  private 
   def authenticate_admin
     unless current_user.admin?
