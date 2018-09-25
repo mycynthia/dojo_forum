@@ -12,7 +12,8 @@ gem 'bootstrap-sass', '~> 3.3.7'
 gem 'jquery-rails'
 # 多樣化假資料
 gem 'ffaker'
-
+# 照片上傳器
+gem 'carrierwave'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.1'
 # Use sqlite3 as the database for Active Record
