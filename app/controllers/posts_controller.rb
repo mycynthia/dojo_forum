@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
+  before_action :set_post, only: [:show, :edit, :update]
   def index
     @posts = Post.page(params[:page]).per(12)
   end
@@ -8,6 +9,15 @@ class PostsController < ApplicationController
   end
   def edit
     # set_post
+  end
+  def update
+    if @post.update(post_params)
+      flash[:notice] = "Post was successfully updated"
+      redirect_to post_path(@post) 
+    else
+      flash.now[:alert] = "Post was failed to update"
+      render :edit
+    end
   end
 
   private
