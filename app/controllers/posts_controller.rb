@@ -1,5 +1,4 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, except: [:index]
   before_action :set_post, only: [:show, :edit, :update]
   def index
     @posts = Post.page(params[:page]).per(12)
