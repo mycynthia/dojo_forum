@@ -11,9 +11,10 @@
   </div>
 <!-- right -->
   <div class="col-md-9">
-    <img src="http://via.placeholder.com/400x200">
-    <p class="text-muted">
+    <%= image_tag @post.image.url , width: "400px", hight: "300px" %>
+      <p class="text-muted">
       <%= @post.description  %>
     </p>
+    <%= link_to 'Back to index', posts_path %>
   </div>
 </div>
