@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update]
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
   def index
     @posts = Post.page(params[:page]).per(12)
   end
@@ -22,19 +22,24 @@ class PostsController < ApplicationController
     end
   end
   def create
-    @post = current_user.posts.build(post_params)
+    @post = Post.new(post_params)
     if @post.save
       flash[:notice] = "Posted successfully"
-      redirect_to post_path
+      redirect_to post_path(@post)
     else
       flash.now[:alert] = "Posted faield"
-      render :index
+      render :new
     end
+  end
+  def destroy
+    @post.destroy
+    redirect_to posts_path
+    flash[:alert] = "Post was deleted"
   end
 
   private
   def post_params
-    params.require(:post).permit(:title, :description, :image)
+    params.require(:post).permit(:title, :description, :image, category_ids:[])
   end
   def set_post
     @post = Post.find(params[:id])

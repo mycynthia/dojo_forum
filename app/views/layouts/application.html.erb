@@ -4,12 +4,43 @@
     <title>DojoForum</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
+<!-- Nav -->
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Public forum</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand">Public forum</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li><%= link_to 'Feeds' %></li>
+          <li><%= link_to 'All-Post', root_path %></li>
+          <li><%= link_to 'New-Post', new_post_path %></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <% if current_user %>
+            <li><p class="navbar-text"><%= current_user.email%>(<%= current_user.role %>)</p></li>
+            <li><%= link_to 'Profile' %></li>
+            <li><%= link_to 'Log Out',destroy_user_session_path, method: :delete %></li>
+          <% else %>
+            <li><%= link_to 'Log In', new_user_session_path %></li>          
+          <% end %>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
     <%= yield %>
   </body>
 </html>
