@@ -8,4 +8,5 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :update]
     root "categoriess#index"
   end
+  resources :categories, only: :show
 end
