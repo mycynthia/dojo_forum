@@ -23,7 +23,10 @@
       <div class="form-group">
         <p class="text-muted">
           <% @post.comments.each do |comment| %>
-            <%= simple_format comment.content, class: "text-muted" %>          
+            <%= simple_format comment.content, class: "text-muted" %> 
+            <%if comment.user == current_user %>
+              <%= link_to "Delete", post_comment_path(@post, comment), method: :delete %>        
+            <% end %>         
           <% end %>
         </p>
       </div>
