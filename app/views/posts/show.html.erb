@@ -3,18 +3,19 @@
     <h1><%= @post.title %></h1>
   </div>
 </div>
-
-<div class="media">
-<!-- left -->
-  <div class="col-md-3">
-    <img src="http://via.placeholder.com/100x100" class= " center-block">
-  </div>
-<!-- right -->
-  <div class="col-md-9">
-    <%= image_tag @post.image.url , width: "400px", hight: "300px" %>
-      <p class="text-muted">
-      <%= @post.description  %>
-    </p>
-    <%= link_to 'Back to index', posts_path %>
+<div class="container">
+  <div class="media">
+  <!-- left -->
+    <div class="col-md-3">
+      <img src="http://via.placeholder.com/100x100" class= " center-block">
+    </div>
+  <!-- right -->
+    <div class="col-md-9">
+      <%= image_tag @post.image.url , width: "400px", hight: "300px" %>
+        <p class="text-muted">
+        <%= @post.description  %>
+      </p>
+      <%= link_to 'Back to index', posts_path %>
+    </div>
   </div>
 </div>
