@@ -5,17 +5,29 @@
 </div>
 <div class="container">
   <div class="media">
-  <!-- left -->
+<!-- left -->
     <div class="col-md-3">
       <img src="http://via.placeholder.com/100x100" class= " center-block">
     </div>
-  <!-- right -->
+<!-- right -->
     <div class="col-md-9">
       <%= image_tag @post.image.url , width: "400px", hight: "300px" %>
         <p class="text-muted">
         <%= @post.description  %>
       </p>
       <%= link_to 'Back to index', posts_path %>
-    </div>
-  </div>
+<!-- create comment -->
+      <div class="row">
+        <%= form_for [@post, @comment] do |f| %>
+        <div class="form-group">
+          <%= f.text_area :content, placeholder: "Say somethings...", class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.submit class: "btn btn-primary" %>
+        </div>
+        <% end %>
+      </div>
+    </div><!-- col-md-9 -->
+
+  </div><!-- media -->
 </div>
