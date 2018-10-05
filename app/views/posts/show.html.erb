@@ -25,6 +25,7 @@
           <% @post.comments.each do |comment| %>
             <%= simple_format comment.content, class: "text-muted" %> 
             <%if comment.user == current_user %>
+              <%= link_to "Edit", post_path(id: @post.id,c_id: comment.id) %>
               <%= link_to "Delete", post_comment_path(@post, comment), method: :delete %>        
             <% end %>         
           <% end %>
