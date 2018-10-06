@@ -16,6 +16,7 @@
           <tr>
             <th>User Name</th>
             <th>User Email</th>
+            <th>User avatar</th>
             <th>Role</th>
           </tr>
         </thead>
@@ -24,6 +25,9 @@
           <tr>
             <td><%= user.name %></td>
             <td><%= user.email %></td>
+            <td>
+              <%= image_tag user.avatar, width: "100px", height: "100px" if user.avatar? %>
+            </td>
             <td>
               <%= form_for [:admin, user] do |f| %>
                 <%= f.select(:role, [['Select Role', ''],['Normal','normal'],['Admin','admin']])%>
