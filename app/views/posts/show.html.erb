@@ -3,39 +3,60 @@
     <h1><%= @post.title %></h1>
   </div>
 </div>
-<!-- post -->
 <div class="container">
   <div class="media">
-<!-- left -->
-    <div class="col-md-3">
-      <img src="http://via.placeholder.com/100x100" class= " center-block">
-    </div>
+<!-- post -->
+    <div class="row">
+      <div class="col-md-3">
+        <%= image_tag @post.user.avatar, width: "100px", height: "100px" if @post.user.avatar? %>
+        <div>
+          <%= @post.user.name %>
+        </div>
+      </div>
 <!-- right -->
-    <div class="col-md-9">
-      <div class="form-group">
-        <%= image_tag @post.image.url , width: "400px", hight: "300px" %>
-        <%= link_to 'Back to index', posts_path %>
-        <p class="text-muted">
-          <%= @post.description  %>
-        </p>
+      <div class="col-md-9">
+        <div class="form-group">
+          <%= image_tag @post.image.url , width: "400px", hight: "300px" %>
+          <%= link_to 'Back to index', posts_path %>
+          <p class="text-muted">
+            <%= @post.description  %>
+            <div>
+              <% if @post.user == current_user %>
+                <%= link_to "Edit" %>
+                <%= link_to "Delete" %>
+              <% end %>              
+            </div>
+          </p>
+        </div>
       </div>
-<!-- show comment -->
-      <div class="form-group">
-        <p class="text-muted">
-          <% @post.comments.each do |comment| %>
-            <%= simple_format comment.content, class: "text-muted" %> 
-            <div class="form-group" style="text-align: right;">
-            <%if comment.user == current_user %>
-              <%= link_to "Edit", post_path(id: @post.id,c_id: comment.id) %>
-              <%= link_to "Delete", post_comment_path(@post, comment), method: :delete %>        
-            <% end %> 
-            </div>        
-          <% end %>
-        </p>
-      </div>
-      <%= paginate @comments %>
     </div><!-- col-md-9 -->
+<!-- show comment -->
+    <% @post.comments.each do |comment| %>
+      <div class="row">
+          <div class="col-md-3">
+            <%= image_tag comment.user.avatar, width: "100px", height: "100px" if comment.user.avatar? %>
+            <div>
+              <%= comment.user.name %>
+            </div>
+          </div>
+          <div class="col-md-9">
+            <div class="form-group">
+              <p class="text-muted">
+                <%= simple_format comment.content, class: "text-muted" %> 
+                <div class="form-group" style="text-align: right;">
+                <%if comment.user == current_user %>
+                  <%= link_to "Edit", post_path(id: @post.id,c_id: comment.id) %>
+                  <%= link_to "Delete", post_comment_path(@post, comment), method: :delete %>
+                <% end %> 
+                </div>        
+              </p>
+            </div>
+          <%= paginate @comments %>        
+          </div>
+      </div>
+    <% end %>
 <!-- create comment -->
+<br>
  <div class="form-group">
   <%= form_for [@post, @comment] do |f| %>
     <div class="form-group">
@@ -46,5 +67,6 @@
     </div>
   <% end %>
   </div> 
+  
   </div><!-- media -->
 </div><!-- container -->
