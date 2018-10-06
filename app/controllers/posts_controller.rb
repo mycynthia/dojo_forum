@@ -12,12 +12,13 @@ class PostsController < ApplicationController
     else
       @comment = Comment.new
     end
+    @users = User.all
   end
   def edit
     # set_post
   end
   def new
-    @post = Post.new
+    @post = current_user.posts.build
   end
   def update
     if @post.update(post_params)
@@ -29,7 +30,7 @@ class PostsController < ApplicationController
     end
   end
   def create
-    @post = Post.new(post_params)
+    @post = current_user.posts.new(post_params)
     if @post.save
       flash[:notice] = "Posted successfully"
       redirect_to post_path(@post)
