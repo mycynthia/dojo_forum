@@ -7,11 +7,14 @@ namespace :dev do
           title: FFaker::Book.title,
           description: FFaker::Book.description,
           viewed_count: FFaker::Random.rand(10..50),
-          created_at: FFaker::Time.datetime
+          image: File.open(File.join(Rails.root, "public/seed_image/#{rand(1...11)}.jpg")),
+          created_at: FFaker::Time.datetime,
+          user_id: FFaker::Random.rand(1..22)
         )
       end
       puts "have created #{Post.count} fake posts"
   end
+
 end
 
 # uiname
