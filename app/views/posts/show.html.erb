@@ -21,10 +21,12 @@
           <p class="text-muted">
             <%= @post.description  %>
             <div>
+              <% if @post.user == current_user || current_user.admin? %>
+                <%= link_to "Delete", post_path(@post), method: :delete, data: {confirm: "Are you sure?"} %>  
+              <% end %>
               <% if @post.user == current_user %>
-                <%= link_to "Edit" %>
-                <%= link_to "Delete" %>
-              <% end %>              
+                <%= link_to "Edit", edit_post_path(@post) %>
+              <% end %>           
             </div>
           </p>
         </div>
