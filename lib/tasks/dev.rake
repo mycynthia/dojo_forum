@@ -7,15 +7,31 @@ namespace :dev do
           title: FFaker::Book.title,
           description: FFaker::Book.description,
           viewed_count: FFaker::Random.rand(10..50),
-          created_at: FFaker::Time.datetime
+          image: File.open(File.join(Rails.root, "public/seed_image/#{rand(1...11)}.jpg")),
+          created_at: FFaker::Time.datetime,
+          user_id: FFaker::Random.rand(1..22),
+          category_ids: (26...31).to_a.shuffle.take(rand(2..4))
         )
       end
       puts "have created #{Post.count} fake posts"
   end
-end
+
+  task fake_comment: :environment do
+    Comment.destroy_all
+      Post.all.each do |post|
+        30.times do |i|
+          post.comments.create!(
+            content: FFaker::Lorem.sentence,
+            user: User.all.sample,
+            created_at: FFaker::Time.datetime,
+            updated_at: FFaker::Time.datetime
+          )
+      end
+    end
+    puts "Crested #{Comment.count} fake comments"
+  end
 
 # uiname
-namespace :dev do
   task fetch_user: :environment do
     User.destroy_all
     url = "https://uinames.com/api/?ext&region=england"

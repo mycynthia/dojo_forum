@@ -16,7 +16,7 @@
 <!-- right -->
       <div class="col-md-9">
         <div class="form-group">
-          <%= image_tag @post.image.url , width: "400px", hight: "300px" %>
+          <%= image_tag @post.image.url , width: "400px", hight: "300px" if @post.image? %>
           <%= link_to 'Back to index', posts_path %>
           <p class="text-muted">
             <%= @post.description  %>
@@ -31,7 +31,7 @@
       </div>
     </div><!-- col-md-9 -->
 <!-- show comment -->
-    <% @post.comments.each do |comment| %>
+    <% @comments.each do |comment| %>
       <div class="row">
           <div class="col-md-3">
             <%= image_tag comment.user.avatar, width: "100px", height: "100px" if comment.user.avatar? %>
@@ -42,6 +42,7 @@
           <div class="col-md-9">
             <div class="form-group">
               <p class="text-muted">
+                <%= comment.created_at %>
                 <%= simple_format comment.content, class: "text-muted" %> 
                 <div class="form-group" style="text-align: right;">
                 <%if comment.user == current_user %>
@@ -51,10 +52,10 @@
                 </div>        
               </p>
             </div>
-          <%= paginate @comments %>        
           </div>
       </div>
     <% end %>
+  
 <!-- create comment -->
 <br>
  <div class="form-group">
@@ -67,6 +68,8 @@
     </div>
   <% end %>
   </div> 
-  
+    <!-- kaminari -->
+  <%= paginate @comments %> 
+     
   </div><!-- media -->
 </div><!-- container -->

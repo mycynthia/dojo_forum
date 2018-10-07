@@ -1,5 +1,5 @@
 class Post < ApplicationRecord
-  has_many :post_categories, dependent: :restrict_with_error
+  has_many :post_categories
   has_many :categories, through: :post_categories, source: :category
   has_many :comments
   belongs_to :user
