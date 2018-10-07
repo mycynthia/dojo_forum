@@ -9,7 +9,8 @@ namespace :dev do
           viewed_count: FFaker::Random.rand(10..50),
           image: File.open(File.join(Rails.root, "public/seed_image/#{rand(1...11)}.jpg")),
           created_at: FFaker::Time.datetime,
-          user_id: FFaker::Random.rand(1..22)
+          user_id: FFaker::Random.rand(1..22),
+          category_ids: (26...31).to_a.shuffle.take(rand(2..4))
         )
       end
       puts "have created #{Post.count} fake posts"
