@@ -16,10 +16,22 @@ namespace :dev do
       puts "have created #{Post.count} fake posts"
   end
 
-end
+  task fake_comment: :environment do
+    Comment.destroy_all
+      Post.all.each do |post|
+        30.times do |i|
+          post.comments.create!(
+            content: FFaker::Lorem.sentence,
+            user: User.all.sample,
+            created_at: FFaker::Time.datetime,
+            updated_at: FFaker::Time.datetime
+          )
+      end
+    end
+    puts "Crested #{Comment.count} fake comments"
+  end
 
 # uiname
-namespace :dev do
   task fetch_user: :environment do
     User.destroy_all
     url = "https://uinames.com/api/?ext&region=england"
