@@ -1,18 +1,17 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   def index
-    @posts = Post.page(params[:page]).per(20)
+    @posts = Post.order(created_at: :desc).page(params[:page]).per(20)
     @categories = Category.all
   end
   def show
     # set_post
-    @comments = Comment.page(params[:page]).per(20)
     if params[:c_id]
       @comment = Comment.find(params[:c_id])
     else
       @comment = Comment.new
     end
-    @users = User.all
+    @comments = @post.comments.order(created_at: :desc).page(params[:page]).per(20)
   end
   def edit
     # set_post
