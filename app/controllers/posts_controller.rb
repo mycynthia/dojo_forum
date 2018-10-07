@@ -38,10 +38,13 @@ class PostsController < ApplicationController
       render :new
     end
   end
+
   def destroy
-    @post.destroy
-    redirect_to posts_path
-    flash[:alert] = "Post was deleted"
+    if current_user.admin? || @post.user == current_user
+      @post.destroy
+      redirect_to posts_path(@post)
+      flash[:alert] = "Post was deleted"
+    end
   end
 
   private
