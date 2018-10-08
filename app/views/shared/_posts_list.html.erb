@@ -1,6 +1,7 @@
 <table class="table">
     <thead class="thead-dark">
       <tr>
+        <th>Post ID</th>
         <th>
           <%= sort_link(@q, :replies_count, 'Replies count', default_order: :desc) %>
         </th>
@@ -10,13 +11,13 @@
         </th>
         <th>
           <%= sort_link(@q, :viewed_count, 'Viewed count',default_order: :desc) %>
-        
         </th>
       </tr>
     </thead>
     <tbody>
       <% @posts.each do |post| %>
         <tr>
+          <td><%= post.id %></td>
           <td><%= post.comments.size %></td>
           <td><%= link_to post.title, post_path(post) %></td>
           <td>
