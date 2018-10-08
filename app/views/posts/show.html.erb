@@ -45,6 +45,7 @@
             <div class="form-group">
               <p class="text-muted">
                 <%= comment.created_at %>
+                [<%= comment.id %>]
                 <%= simple_format comment.content, class: "text-muted" %> 
                 <div class="form-group" style="text-align: right;">
                 <%if comment.user == current_user %>
