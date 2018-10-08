@@ -12,6 +12,8 @@ class PostsController < ApplicationController
       @comment = Comment.new
     end
     @comments = @post.comments.order(created_at: :desc).page(params[:page]).per(20)
+    @post.viewed_count += 1
+    @post.save!
   end
   def edit
     # set_post
