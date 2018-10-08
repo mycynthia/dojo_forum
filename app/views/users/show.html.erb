@@ -1,1 +1,70 @@
-<h1>User profile</h1>
+<div class="container">
+  <div class="row">
+    <div class="row index-title">
+<!-- user avatar and intro -->
+      <div class="row">
+        <div class="col-md-4">
+          <div class="text-center">
+            <%= image_tag @user.avatar, width: "100px", height: "100px" if @user.avatar? %>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="row">
+           <%= @user.introduction %> 
+          </div>
+        </div> 
+      </div>
+<!-- user name and edit btn -->
+      <div class="row">
+        <div class="col-md-4">
+          <div class="row text-center">
+            <%= @user.name %>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="row">
+            <% if @user == current_user %>
+              <%= link_to "Edit", edit_user_path(@user), class: "btn btn-primary", style: "float:right" %>
+            <% end %>         
+          </div>
+        </div> 
+      </div>       
+    </div>
+  </div><!-- row -->
+</div><!-- container -->
+<!-- user detail -->
+<div class="container">
+  <div class="row">
+<!-- profile lebel -->
+    <ul class="nav nav-tabs">
+      <li role="presentation" class="active">
+        <%= link_to "My Post" %>
+      </li>
+      <li role="presentation">
+        <%= link_to "My Comment" %>
+      </li>
+      <li role="presentation">
+        <%= link_to "My Collect" %>
+      </li>
+      <li role="presentation">
+        <%= link_to "My Draft" %>
+      </li>
+      <li role="presentation">
+        <%= link_to "My Friend" %>
+      </li>            
+    </ul>
+<!-- profile content -->
+<div class="container">
+  <div class="row">
+    
+  </div>
+</div>
+<!-- new post btn -->
+<br>
+<div class="container">
+  <div class="row">
+    <%= link_to "New Post", new_post_path, class: "btn btn-primary" %>
+  </div>
+</div>
+  </div><!-- row -->
+</div><!-- container -->
