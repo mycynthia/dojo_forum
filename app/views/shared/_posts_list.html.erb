@@ -8,7 +8,10 @@
         <th>
           <%= sort_link(@q, :updated_at, 'Last replied at', default_order: :desc) %>    
         </th>
-        <th>Viewed count</th>
+        <th>
+          <%= sort_link(@q, :viewed_count, 'Viewed count',default_order: :desc) %>
+        
+        </th>
       </tr>
     </thead>
     <tbody>
