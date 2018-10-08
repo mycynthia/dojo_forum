@@ -5,7 +5,9 @@
           <%= sort_link(@q, :replies_count, 'Replies count', default_order: :desc) %>
         </th>
         <th>Title</th>
-        <th>Last replied at</th>
+        <th>
+          <%= sort_link(@q, :updated_at, 'Last replied at', default_order: :desc) %>    
+        </th>
         <th>Viewed count</th>
       </tr>
     </thead>
@@ -14,7 +16,9 @@
         <tr>
           <td><%= post.comments.size %></td>
           <td><%= link_to post.title, post_path(post) %></td>
-          <td><%= post.created_at.strftime('%Y-%m-%d') %></td> 
+          <td>
+            <%= post.comments.last.created_at.strftime('%Y-%m-%d') %>
+          </td> 
           <td><%= post.viewed_count %></td>
         </tr>
       <% end %>
