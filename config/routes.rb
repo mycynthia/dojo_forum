@@ -11,5 +11,9 @@ Rails.application.routes.draw do
     root "categoriess#index"
   end
   resources :categories, only: :show
-  resources :users, only: [:show, :edit, :update] 
+  resources :users, only: [:show, :edit, :update] do
+    member do
+      get :mycomments
+    end
+  end
 end
