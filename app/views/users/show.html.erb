@@ -1,37 +1,5 @@
-<div class="container">
-  <div class="row">
-    <div class="row index-title">
 <!-- user avatar and intro -->
-      <div class="row">
-        <div class="col-md-4">
-          <div class="text-center">
-            <%= image_tag @user.avatar, width: "100px", height: "100px" if @user.avatar? %>
-          </div>
-        </div>
-        <div class="col-md-8">
-          <div class="row">
-           <%= @user.introduction %> 
-          </div>
-        </div> 
-      </div>
-<!-- user name and edit btn -->
-      <div class="row">
-        <div class="col-md-4">
-          <div class="row text-center">
-            <%= @user.name %>
-          </div>
-        </div>
-        <div class="col-md-8">
-          <div class="row">
-            <% if @user == current_user %>
-              <%= link_to "Edit", edit_user_path(@user), class: "btn btn-primary", style: "float:right" %>
-            <% end %>         
-          </div>
-        </div> 
-      </div>       
-    </div>
-  </div><!-- row -->
-</div><!-- container -->
+  <%= render partial: "shared/profile/user_info" %>
 <!-- user detail -->
 <div class="container">
   <div class="row">
@@ -56,15 +24,23 @@
 <!-- profile content -->
 <div class="container">
   <div class="row">
-    
+    <div class="container">
+      <table class="table">
+        <% @posts.each do |post| %>
+            <tbody>
+              <tr>
+                <td><%= post.title %></td>
+                <td><%= "post status" %></td>
+                <td><%= post.created_at.strftime('%Y-%m-%d') %></td>              
+              </tr>
+            </tbody>
+        <% end %>
+      </table>   
+    </div>
   </div>
 </div>
 <!-- new post btn -->
 <br>
-<div class="container">
-  <div class="row">
-    <%= link_to "New Post", new_post_path, class: "btn btn-primary" %>
-  </div>
-</div>
+    <%= render partial: "shared/btn_new_post" %>
   </div><!-- row -->
 </div><!-- container -->
