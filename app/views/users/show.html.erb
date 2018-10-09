@@ -1,0 +1,47 @@
+<!-- user avatar and intro -->
+  <%= render partial: "shared/profile/user_info" %>
+<!-- user detail -->
+<div class="container">
+  <div class="row">
+<!-- profile lebel -->
+    <ul class="nav nav-tabs">
+      <li role="presentation" class="active">
+        <%= link_to "My Post", user_path %>
+      </li>
+      <li role="presentation">
+        <%= link_to "My Comment", mycomments_user_path %>
+      </li>
+      <li role="presentation">
+        <%= link_to "My Collect" %>
+      </li>
+      <li role="presentation">
+        <%= link_to "My Draft" %>
+      </li>
+      <li role="presentation">
+        <%= link_to "My Friend" %>
+      </li>            
+    </ul>
+    <br>
+<!-- profile content -->
+<div class="container">
+  <div class="row">
+    <div class="container">
+      <table class="table">
+        <tbody>
+         <% @posts.each do |post| %>     
+          <tr>
+            <td><%= post.title %></td>
+            <td><%= "post status" %></td>
+            <td><%= post.created_at.strftime('%Y-%m-%d') %></td>              
+          </tr>
+         <% end %>
+        </tbody>
+      </table>   
+    </div>
+  </div>
+</div>
+<!-- new post btn -->
+<br>
+    <%= render partial: "shared/btn/btn_new_post" %>
+  </div><!-- row -->
+</div><!-- container -->

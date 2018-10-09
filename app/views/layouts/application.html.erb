@@ -32,7 +32,7 @@
         <ul class="nav navbar-nav navbar-right">
           <% if current_user %>
             <li><p class="navbar-text"><%= current_user.email%>(<%= current_user.role %>)</p></li>
-            <li><%= link_to 'Profile' %></li>
+            <li><%= link_to 'Profile', user_path(current_user) %></li>
             <li><%= link_to 'Log Out',destroy_user_session_path, method: :delete %></li>
           <% else %>
             <li><%= link_to 'Log In', new_user_session_path %></li>          

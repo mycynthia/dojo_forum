@@ -1,0 +1,61 @@
+<!-- user avatar and intro -->
+  <%= render partial: "shared/profile/user_info" %>
+<!-- user detail -->
+<div class="container">
+  <div class="row">
+<!-- profile lebel -->
+    <ul class="nav nav-tabs">
+      <li role="presentation">
+        <%= link_to "My Post", user_path %>
+      </li>
+      <li role="presentation" class="active">
+        <%= link_to "My Comment", mycomments_user_path %>
+      </li>
+      <li role="presentation">
+        <%= link_to "My Collect" %>
+      </li>
+      <li role="presentation">
+        <%= link_to "My Draft" %>
+      </li>
+      <li role="presentation">
+        <%= link_to "My Friend" %>
+      </li>            
+    </ul>
+    <br>
+<!-- mycomments content -->
+<div class="container">
+  <div class="row">
+    <table class="table">
+      <tbody>
+        <% @comments.each do |comment| %>
+          <tr>
+            <td>
+              <strong><%= comment.post.title %></strong>
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="panel">
+                    <div class="panel-heading">
+                      <%= comment.content %>
+                    </div>              
+                  </div>                  
+                </div>
+                <div class="col-md-2">
+                  <%= link_to "Edit", post_path(id: comment.post.id,c_id: comment.id) %>
+                </div>
+                <div class="col-md-2">
+                  <%= link_to "Delete", post_comment_path(comment.post, comment), method: :delete %>                  
+                </div>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= paginate @comments %>
+  </div>
+</div>
+<!-- new post btn -->
+<br>
+    <%= render partial: "shared/btn/btn_new_post" %>
+  </div><!-- row -->
+</div><!-- container -->
