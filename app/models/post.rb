@@ -6,4 +6,7 @@ class Post < ApplicationRecord
   validates_presence_of :title
 # carrierwave照片上傳器
 mount_uploader :image, PhotoUploader
+
+ scope :published, -> { where('published_at IS NOT NULL') } 
+ scope :draft, -> { where('published_at IS NULL') }
 end
