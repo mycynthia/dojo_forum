@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :mycomments, :edit, :update]
+  before_action :set_user, only: [:show, :mycomments, :edit, :update, :mydrafts]
 
   def show
-    @posts = @user.posts.order(created_at: :desc)
+    @posts = @user.posts.published.order(created_at: :desc)
   end
   def mycomments
     @comments = @user.comments.page(params[:page]).per(20)
@@ -11,6 +11,9 @@ class UsersController < ApplicationController
     else
       @comment = Comment.new
     end
+  end
+  def mydrafts
+    @drafts = @user.posts.draft.order(created_at: :desc)  
   end
   def edit
     unless @user == current_user
