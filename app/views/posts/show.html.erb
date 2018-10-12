@@ -10,7 +10,7 @@
       <div class="col-md-3">
         <%= image_tag @post.user.avatar.url, width: "100px", height: "100px" if @post.user.avatar? %>
         <div>
-          <%= @post.user.name %>
+          <%= link_to @post.user.name , user_path(@post.user) %>
         </div>
       </div>
 <!-- right -->
@@ -38,7 +38,7 @@
           <div class="col-md-3">
             <%= image_tag comment.user.avatar.url, width: "100px", height: "100px" if comment.user.avatar? %>
             <div>
-              <%= comment.user.name %>
+              <%= link_to comment.user.name, user_path(comment.user) %>
             </div>
           </div>
           <div class="col-md-9">

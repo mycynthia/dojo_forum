@@ -11,15 +11,17 @@
       <li role="presentation">
         <%= link_to "My Comment", mycomments_user_path %>
       </li>
-      <li role="presentation">
-        <%= link_to "My Collect" %>
-      </li>
-      <li role="presentation">
-        <%= link_to "My Draft", mydrafts_user_path %>
-      </li>
-      <li role="presentation">
-        <%= link_to "My Friend" %>
-      </li>            
+      <% if @user == current_user %>
+        <li role="presentation">
+          <%= link_to "My Collect" %>
+        </li>
+        <li role="presentation">
+          <%= link_to "My Draft", mydrafts_user_path %>
+        </li>
+        <li role="presentation">
+          <%= link_to "My Friend" %>
+        </li>
+      <% end %>            
     </ul>
     <br>
 <!-- profile content -->
