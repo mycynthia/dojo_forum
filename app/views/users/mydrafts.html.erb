@@ -31,12 +31,16 @@
          <% @drafts.each do |draft| %>     
           <tr>
             <td><%= draft.title %></td>
-            <td><%= "draft status" %></td>
+            <td>
+              <%= "Draft" if draft %>  
+            </td>
             <td><%= draft.created_at.strftime('%Y-%m-%d') %></td> 
+            <% if draft.user == current_user %>    
             <td>
               <%= link_to "Edit", edit_post_path(draft) %>
               <%= link_to "Delete", post_path(draft), method: :delete, data: {confirm: "Are you sure?"} %>  
-            </td>             
+            </td> 
+            <% end %>            
           </tr>
          <% end %>
         </tbody>
