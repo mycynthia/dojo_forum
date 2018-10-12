@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   def index
     # @posts = Post.order(created_at: :desc).page(params[:page]).per(20)
     @categories = Category.all
-    @q = Post.ransack(params[:q])
+    @q = Post.published.ransack(params[:q])
     @posts = @q.result.page(params[:page])
   end
   def show
@@ -22,6 +22,7 @@ class PostsController < ApplicationController
   end
   def new
     @post = current_user.posts.build
+
   end
   def update
     @post.published_at = Time.zone.now if publishing?
@@ -38,7 +39,8 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.build(post_params)
     @post.published_at = Time.zone.now if publishing?
-
+    @post.replied_at = Time.zone.now
+    
     if @post.save
       flash[:notice] = "Posted successfully"
       redirect_to post_path(@post)

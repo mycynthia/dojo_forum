@@ -5,6 +5,7 @@ class CommentsController < ApplicationController
     @comment = @post.comments.build(comment_params)
     @comment.user = current_user
     if  @comment.save
+      @post.update!(replied_at: Time.zone.now)
       flash[:notice] = "Comment created successfully"
       redirect_to post_path(@post)
     else
