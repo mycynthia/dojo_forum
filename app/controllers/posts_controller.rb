@@ -24,6 +24,9 @@ class PostsController < ApplicationController
     @post = current_user.posts.build
   end
   def update
+    @post.published_at = Time.zone.now if publishing?
+    @post.published_at = nil if saving_draft?
+
     if @post.update(post_params)
       flash[:notice] = "Post was successfully updated"
       redirect_to post_path(@post) 
@@ -33,7 +36,9 @@ class PostsController < ApplicationController
     end
   end
   def create
-    @post = current_user.posts.new(post_params)
+    @post = current_user.posts.build(post_params)
+    @post.published_at = Time.zone.now if publishing?
+
     if @post.save
       flash[:notice] = "Posted successfully"
       redirect_to post_path(@post)
@@ -57,5 +62,11 @@ class PostsController < ApplicationController
   end
   def set_post
     @post = Post.find(params[:id])
+  end
+  def publishing?
+    params[:commit] == "Publish"
+  end
+  def saving_draft?
+    params[:commit] == "Save a Draft"
   end
 end
