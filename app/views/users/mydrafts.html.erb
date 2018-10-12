@@ -5,7 +5,7 @@
   <div class="row">
 <!-- profile lebel -->
     <ul class="nav nav-tabs">
-      <li role="presentation" class="active">
+      <li role="presentation">
         <%= link_to "My Post", user_path %>
       </li>
       <li role="presentation">
@@ -14,7 +14,7 @@
       <li role="presentation">
         <%= link_to "My Collect" %>
       </li>
-      <li role="presentation">
+      <li role="presentation" class="active">
         <%= link_to "My Draft", mydrafts_user_path %>
       </li>
       <li role="presentation">
@@ -28,11 +28,15 @@
     <div class="container">
       <table class="table">
         <tbody>
-         <% @posts.each do |post| %>     
+         <% @drafts.each do |draft| %>     
           <tr>
-            <td><%= post.title %></td>
-            <td><%= "post status" %></td>
-            <td><%= post.created_at.strftime('%Y-%m-%d') %></td>              
+            <td><%= draft.title %></td>
+            <td><%= "draft status" %></td>
+            <td><%= draft.created_at.strftime('%Y-%m-%d') %></td> 
+            <td>
+              <%= link_to "Edit", edit_post_path(draft) %>
+              <%= link_to "Delete", post_path(draft), method: :delete, data: {confirm: "Are you sure?"} %>  
+            </td>             
           </tr>
          <% end %>
         </tbody>
