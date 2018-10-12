@@ -8,9 +8,8 @@ namespace :dev do
           description: FFaker::Book.description,
           viewed_count: FFaker::Random.rand(10..50),
           image: File.open(File.join(Rails.root, "public/seed_image/#{rand(1...11)}.jpg")),
-          created_at: FFaker::Time.datetime,
-          user_id: FFaker::Random.rand(1..22),
-          category_ids: (26...31).to_a.shuffle.take(rand(2..4))
+          user: User.all.sample,
+          category_ids: (1...6).to_a.shuffle.take(rand(2..4))
         )
       end
       puts "have created #{Post.count} fake posts"
@@ -22,33 +21,40 @@ namespace :dev do
         30.times do |i|
           post.comments.create!(
             content: FFaker::Lorem.sentence,
-            user: User.all.sample,
-            created_at: FFaker::Time.datetime,
-            updated_at: FFaker::Time.datetime
+            user: User.all.sample
           )
       end
     end
     puts "Crested #{Comment.count} fake comments"
   end
 
-# uiname
-  task fetch_user: :environment do
+# create user
+  task fake_user: :environment do
     User.destroy_all
-    url = "https://uinames.com/api/?ext&region=england"
-    20.times do
-      response = RestClient.get(url)
-      data = JSON.parse(response.body)
-      user = User.create!(
-        name: data["name"],
-        email: data["email"],
-        password: data["password"],
-        avatar: data["photo"] 
-      )
 
-      puts "created user #{user.name}"
+    User.create!(
+      name: "admin",
+      email: "admin@example.com",
+      password: "12345678",
+      role: "admin",
+      avatar: FFaker::Avatar.image
+    )
+    puts "Admin created!"
+
+    20.times do |i|
+      name = FFaker::Name::first_name
+      file = File.open("#{Rails.root}/public/avatar/#{i+1}.png")
+      user = User.new(
+        name: name,
+        email: "#{name}@example.com",
+        password: "12345678",
+        role: "normal",
+        introduction: FFaker::Lorem::sentence(30),
+        avatar: file
+        )
+    user.save!
+    puts user.name
     end
-
-    puts "now you have #{User.count} users data"
   end
 
 end
