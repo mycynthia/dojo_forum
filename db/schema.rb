@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_12_061327) do
+ActiveRecord::Schema.define(version: 2018_10_12_134001) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2018_10_12_061327) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "comment_count", default: 0
   end
 
   create_table "post_categories", force: :cascade do |t|
@@ -60,7 +61,7 @@ ActiveRecord::Schema.define(version: 2018_10_12_061327) do
     t.string "last_sign_in_ip"
     t.string "role"
     t.text "introduction"
-    t.integer "user_count"
+    t.integer "user_count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "avatar"

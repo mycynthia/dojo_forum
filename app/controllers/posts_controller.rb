@@ -58,6 +58,14 @@ class PostsController < ApplicationController
     end
   end
 
+  def feeds
+    @user_count = User.all.count
+    @post_count = Post.all.count
+    @comment_count = Comment.all.count
+    @popular_posts = Post.all.order("posts.replies_count DESC").limit(10)
+    @popular_users = User.all.order("users.user_count DESC").limit(10)
+  end
+
   private
   def post_params
     params.require(:post).permit(:title, :description, :image, category_ids:[])

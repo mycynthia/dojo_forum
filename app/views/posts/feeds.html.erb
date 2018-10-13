@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="row text-center">
+    <div class="col-md-4">
+      <h1>User</h1>
+    </div>
+    <div class="col-md-4">
+      <h1>Post</h1>
+    </div>
+    <div class="col-md-4">
+      <h1>Comment</h1>
+    </div>
+  </div>
+  <div class="row text-center">
+    <div class="col-md-4">
+      <h1><%= @user_count %></h1>
+    </div>
+    <div class="col-md-4">
+      <h1><%= @post_count %></h1>
+    </div>
+    <div class="col-md-4">
+      <h1><%= @comment_count %></h1>
+    </div>
+  </div>
+  <br>
+</div>
+<div class="container">
+  <div class="col-md-10">
+    <div class="row">
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">Chatterbox</div>
+            <div class="panel-body">
+              <table>
+                  <% i = 0 %>
+                  <% @popular_users.each do |user| %>
+                    <tr>
+                      <td><%= i += 1 %></td>
+                      <td><%= user.name %></td>
+                      <td><%= user.user_count %></td>
+                    </tr>
+                  <% end %>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">Most Popular Post</div>
+            <div class="panel-body">
+              <table>
+                  <% i = 0 %>
+                  <% @popular_posts.each do |post| %>
+                    <tr>
+                      <td><%= i += 1 %></td>
+                      <td><%= post.title %></td>
+                      <td><%= post.replies_count %></td>
+                    </tr>
+                  <% end %>
+              </table>
+            </div>
+          </div>          
+        </div>
+    </div>
+  </div>
+</div>
